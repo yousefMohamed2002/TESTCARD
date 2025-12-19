@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="main-html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Tech | Digital Identity</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Cairo:wght@300;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --space-blue: #3b82f6; --space-dark: #050811; }
+        body { background: var(--space-dark); color: white; font-family: 'Cairo', sans-serif; transition: all 0.3s ease; }
+        .en-font { font-family: 'Orbitron', sans-serif; }
+        
+        /* --- Space Background --- */
+        #space-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -10; }
+        .planet { 
+            position: fixed; width: 250px; height: 250px; border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #1e40af, #000);
+            box-shadow: inset -20px -20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(59, 130, 246, 0.2);
+            top: -50px; left: -50px; z-index: -5; 
+        }
+
+        .glass-card { 
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 24px; backdrop-filter: blur(15px);
+        }
+
+        .glow-st { box-shadow: 0 0 20px rgba(59, 130, 246, 0.5); border: 2px solid rgba(59, 130, 246, 0.8); }
+
+        /* Shooting Star */
+        .shooting-star {
+            position: absolute; width: 2px; height: 2px; background: white;
+            animation: shoot 5s linear infinite; opacity: 0;
+        }
+        @keyframes shoot {
+            0% { transform: translate(0, 0) rotate(45deg); opacity: 0; width: 0; }
+            5% { opacity: 1; width: 80px; }
+            15% { transform: translate(600px, 600px) rotate(45deg); opacity: 0; width: 0; }
+            100% { opacity: 0; }
+        }
+    </style>
+</head>
+<body class="p-5 flex flex-col items-center">
+
+    <canvas id="space-canvas"></canvas>
+    <div class="planet"></div>
+    <div class="shooting-star" style="top: 10%; left: 30%;"></div>
+
+    <div class="w-full max-w-md flex justify-end mb-4">
+        <button onclick="toggleLanguage()" class="glass-card px-4 py-2 text-xs font-bold border-blue-500/50 flex items-center gap-2 hover:bg-blue-600/20 transition-all">
+            <i class="fas fa-language text-lg"></i>
+            <span id="lang-text">English</span>
+        </button>
+    </div>
+
+    <div class="w-full max-w-md space-y-4 relative z-10">
+        
+        <div class="glass-card p-6 flex items-center justify-between">
+            <div id="header-content" class="text-right">
+                <h1 class="text-2xl font-black tracking-tighter text-blue-400 en-font">SPACE TECH</h1>
+                <p id="sub-title" class="text-blue-200 text-xs italic opacity-80">ما وراء الحدود</p>
+                <div id="verified-tag" class="mt-2 bg-blue-900/40 text-blue-300 text-[9px] px-2 py-1 rounded inline-block border border-blue-500/30">
+                    هوية موثقة
+                </div>
+            </div>
+            <div class="w-20 h-20 rounded-2xl bg-black flex items-center justify-center glow-st overflow-hidden">
+                <span class="text-3xl font-bold text-white en-font">ST</span>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3">
+            <a href="tel:0100000000" class="glass-card p-4 text-center hover:bg-blue-600/20">
+                <i class="fas fa-phone-alt text-blue-500 text-xl mb-1"></i>
+                <p class="text-[10px] text-gray-400 lang-target" data-ar="اتصال" data-en="Call">اتصال</p>
+            </a>
+            <a href="https://wa.me/2010000000" class="glass-card p-4 text-center hover:bg-green-600/20">
+                <i class="fab fa-whatsapp text-green-500 text-xl mb-1"></i>
+                <p class="text-[10px] text-gray-400 lang-target" data-ar="واتساب" data-en="WhatsApp">واتساب</p>
+            </a>
+            <a href="mailto:info@spacetech.io" class="glass-card p-4 text-center hover:bg-red-600/20">
+                <i class="fas fa-envelope text-red-500 text-xl mb-1"></i>
+                <p class="text-[10px] text-gray-400 lang-target" data-ar="إيميل" data-en="Email">إيميل</p>
+            </a>
+        </div>
+
+        <div class="glass-card p-5 space-y-4">
+            <h3 id="section-title" class="text-[10px] font-bold text-gray-500 uppercase tracking-[3px] border-b border-white/10 pb-2">بيانات التواصل والروابط</h3>
+            
+            <a href="#" class="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/5">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded bg-blue-600/20 flex items-center justify-center text-[#0077b5]"><i class="fab fa-linkedin-in"></i></div>
+                    <span class="text-sm">linkedin.com/in/spacetech</span>
+                </div>
+            </a>
+
+            <a href="#" class="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/5">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded bg-blue-400/20 flex items-center justify-center text-blue-400"><i class="fas fa-rocket"></i></div>
+                    <span class="text-sm font-bold">www.spacetech.io</span>
+                </div>
+            </a>
+
+            <div class="grid grid-cols-2 gap-3">
+                <div class="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/5">
+                    <i class="fab fa-twitter text-blue-400"></i>
+                    <span class="text-xs">Twitter</span>
+                </div>
+                <div class="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/5">
+                    <i class="fab fa-instagram text-pink-500"></i>
+                    <span class="text-xs">Instagram</span>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3 p-3 opacity-60">
+                <i class="fas fa-map-marker-alt text-red-500"></i>
+                <span id="location-text" class="text-[11px]">القاهرة، محطة الأرض</span>
+            </div>
+        </div>
+
+        <button id="save-btn" class="w-full bg-blue-600 text-white font-bold py-5 rounded-2xl shadow-[0_0_20px_rgba(37,99,235,0.4)] flex items-center justify-center gap-3 transition-transform active:scale-95">
+            <i class="fas fa-user-plus text-xl"></i>
+            <span>حفظ جهة الاتصال</span>
+        </button>
+
+        <footer class="text-center pb-10">
+            <p class="text-[8px] text-gray-600 tracking-[6px] uppercase">Space Tech Systems &copy; 2025</p>
+        </footer>
+    </div>
+
+    <script>
+        let currentLang = 'ar';
+
+        function toggleLanguage() {
+            const html = document.getElementById('main-html');
+            const langBtnText = document.getElementById('lang-text');
+            const subTitle = document.getElementById('sub-title');
+            const verified = document.getElementById('verified-tag');
+            const sectionTitle = document.getElementById('section-title');
+            const locationText = document.getElementById('location-text');
+            const saveBtn = document.querySelector('#save-btn span');
+            const targets = document.querySelectorAll('.lang-target');
+            const headerContent = document.getElementById('header-content');
+
+            if (currentLang === 'ar') {
+                // Switch to English
+                html.dir = 'ltr';
+                html.lang = 'en';
+                langBtnText.innerText = 'العربية';
+                subTitle.innerText = 'Beyond the Limits';
+                verified.innerText = 'SAT-ID VERIFIED';
+                sectionTitle.innerText = 'Space Tech Coordinates';
+                locationText.innerText = 'Cairo, Earth Base Station';
+                saveBtn.innerText = 'Save Contact';
+                headerContent.classList.replace('text-right', 'text-left');
+                targets.forEach(t => t.innerText = t.getAttribute('data-en'));
+                currentLang = 'en';
+            } else {
+                // Switch to Arabic
+                html.dir = 'rtl';
+                html.lang = 'ar';
+                langBtnText.innerText = 'English';
+                subTitle.innerText = 'ما وراء الحدود';
+                verified.innerText = 'هوية موثقة';
+                sectionTitle.innerText = 'بيانات التواصل والروابط';
+                locationText.innerText = 'القاهرة، محطة الأرض';
+                saveBtn.innerText = 'حفظ جهة الاتصال';
+                headerContent.classList.replace('text-left', 'text-right');
+                targets.forEach(t => t.innerText = t.getAttribute('data-ar'));
+                currentLang = 'ar';
+            }
+        }
+
+        // --- Space Animation Logic ---
+        const canvas = document.getElementById('space-canvas');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+        function initStars() {
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+            stars = [];
+            for (let i = 0; i < 150; i++) {
+                stars.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, size: Math.random() * 1.5, opacity: Math.random(), speed: Math.random() * 0.02 });
+            }
+        }
+        function drawStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            stars.forEach(star => {
+                ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
+                ctx.beginPath(); ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2); ctx.fill();
+                star.opacity += star.speed;
+                if (star.opacity > 1 || star.opacity < 0.2) star.speed = -star.speed;
+            });
+            requestAnimationFrame(drawStars);
+        }
+        window.addEventListener('resize', initStars);
+        initStars(); drawStars();
+    </script>
+</body>
+</html>
